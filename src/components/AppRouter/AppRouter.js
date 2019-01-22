@@ -22,27 +22,32 @@ const mapAliasRoute = [
     {
         component:Home,
         path:'/app',
-        exact:true
+        exact:true,
+        title:()=>'Home'
     },
     {
         component:InboxList,
         path:'/app/inbox',
-        exact:true
+        exact:true,
+        title:()=>'Inbox'
     },
     {
         component:InboxMail,
         path:'/app/inbox/:id',
-        exact:false
+        exact:false,
+        title:()=>'Inbox'
     },
     {
         component:OutboxList,
         path:'/app/outbox',
-        exact:true
+        exact:true,
+        title:()=>'Outbox'
     },
     {
         component:OutboxMail,
         path:'/app/outbox/:id',
-        exact:false
+        exact:false,
+        title:()=>'Outbox'
     }
 ]
 
@@ -86,7 +91,21 @@ class AppRouter extends Component{
                         </ul>
                     </nav>
                     <div className={style.content}>
-                        <h3 className={style.title}>Home</h3>
+                        <h3 className={style.title}>
+                        {
+                            mapAliasRoute.map(route=>{
+                                return(
+                                <Route 
+                                    path={route.path} 
+                                    component={route.title}
+                                    key={route.path} 
+                                    exact={route.exact}
+                                />
+                                )
+                                
+                            })
+                        }
+                        </h3>
                         <Switch>
                             {
                                 mapAliasRoute.map(route=>{
